@@ -3,9 +3,26 @@ extends Node
 var toast;
 
 func _ready():
-	toast = Toast.new("This is a toast", Toast.LENGTH_SHORT)
-	call_deferred("showToast")
+	call_deferred("showToast", "normal")
 
-func showToast():
-	get_node("/root").add_child(toast)
-	toast.show()
+func showToast(type: String):
+	match type:
+		"normal":
+			toast = Toast.new("This is the default toast", Toast.LENGTH_SHORT)
+			get_node("/root").add_child(toast)
+			toast.connect("done", self, "showToast", ["full"])
+			toast.show()
+		"full":
+			toast = Toast.new("This is a full toast", Toast.LENGTH_SHORT, preload("res://full_bottom_toast_style.tres"))
+			get_node("/root").add_child(toast)
+			toast.connect("done", self, "showToast", ["normal_top"])
+			toast.show()
+		"normal_top":
+			toast = Toast.new("This is a normal toast positioned at the top", Toast.LENGTH_SHORT, preload("res://float_top_toast_style.tres"))
+			get_node("/root").add_child(toast)
+			toast.connect("done", self, "showToast", ["full_top"])
+			toast.show()
+		"full_top":
+			toast = Toast.new("This is a full toast positioned at the top", Toast.LENGTH_SHORT, preload("res://full_top_toast_style.tres"))
+			get_node("/root").add_child(toast)
+			toast.show()

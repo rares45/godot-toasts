@@ -13,9 +13,15 @@ _global_script_classes=[ {
 "class": "Toast",
 "language": "GDScript",
 "path": "res://addons/toast/toast_script.gd"
+}, {
+"base": "Resource",
+"class": "ToastStyle",
+"language": "GDScript",
+"path": "res://addons/toast/style_resource/toast_style.gd"
 } ]
 _global_script_class_icons={
-"Toast": ""
+"Toast": "",
+"ToastStyle": ""
 }
 
 [application]
