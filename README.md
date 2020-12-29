@@ -22,9 +22,16 @@ Toast
 
 Methods
 -------
-| Toast | new(text: String, lenght: ToastLenght) |
-|-------|----------------------------------------|
-| void  | show()                                 |
+| Toast | new(text: String, lenght: ToastLenght, mstyle: ToastStyle = `preload( "style_resource/default.tres")` ) |
+|-|-|
+| void | show() |
+
+
+Properties
+----------
+
+| Resource | style |
+|----------|-------|
 
 Enumerations
 ============
@@ -39,10 +46,22 @@ Signals
 * `done()`\
     Emitted when the toast has terminated its job and is preparing for deleteing itself.
 
+Property Descriptions
+---------------------
+* `Resource` style \
+    Controls the toast aspect. The value is declared as a Resource, even if there is a custom resource because of a Godot limitation. Will be changed in Godot 4.0.[(see this)](https://github.com/godotengine/godot/issues/6763#issuecomment-629650708)
+
 Methods Descriptions
 --------------------
 
-* `Toast new(text: String, lenght: ToastLengh)`\
-    Returns a new Toast. The `text` is the text that will be shown inside of the toast. `lenght ` represents the duration lenght.
+* `Toast new(text: String, lenght: ToastLenght)`\
+    Returns a new Toast. The `text` is the text that will be shown inside of the toast. `lenght ` represents the duration lenght. `mstyle` represents the toast syle stored in style(see propriety descriptions).
 * `void show()`\
     Starts the toast.
+
+ToastStyle
+=====
+**Inherits:** Reference < Object
+
+A resource that controls the toast aspect. You can create one in the inspector panel and save it as tres or res.
+Recomandation: If you select Full Type make corner radius 0;
