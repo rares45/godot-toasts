@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/icon.svg-39b30bb03358d83ec2f97a7f30f2f38d.stex"
+path="res://.import/Toast.svg-9a627a6acbc27a2cb10eb0b57897859d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/toast/style_resource/icon.svg"
-dest_files=[ "res://.import/icon.svg-39b30bb03358d83ec2f97a7f30f2f38d.stex" ]
+source_file="res://addons/toast/icons/Toast.svg"
+dest_files=[ "res://.import/Toast.svg-9a627a6acbc27a2cb10eb0b57897859d.stex" ]
 
 [params]
 
