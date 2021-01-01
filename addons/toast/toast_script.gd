@@ -31,6 +31,7 @@ func _ready():
 	#Setting itself
 	visible = false;
 	set_anchors_and_margins_preset(Control.PRESET_WIDE);
+	mouse_filter = MOUSE_FILTER_IGNORE
 
 	#Setting the label
 	label = Label.new();
