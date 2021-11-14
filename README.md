@@ -7,7 +7,7 @@ Add the addons folder in you project like your would with any other plugin. Go t
 ##### Using the plugin
 Wherever you want to use just paste this:
 ```
-var toast = Toast.new("Toast text", Toast.LENGHT_SHORT)
+var toast = Toast.new("Toast text", Toast.LENGTH_SHORT)
 get_node("/root").add_child(toast)
 toast.show()
 ```
@@ -22,7 +22,7 @@ Toast
 
 Methods
 -------
-| Toast | new(text: String, lenght: ToastLenght, mstyle: ToastStyle = `preload( "style_resource/default.tres")` ) |
+| Toast | new(text: String, length: ToastLenght, mstyle: ToastStyle = `preload( "style_resource/default.tres")` ) |
 |-|-|
 | void | show() |
 
@@ -37,8 +37,8 @@ Enumerations
 ============
 
 enum `ToastLenght`:\
-    LENGHT_SHORT: the toast will last for 1.5 seconds, including the fading\
-    LENGHT_LONG: the toast will last for 3 seconds, including the fading
+    LENGTH_SHORT: the toast will last for 1.5 seconds, including the fading\
+    LENGTH_LONG: the toast will last for 3 seconds, including the fading
 
 Signals
 =======
@@ -54,8 +54,8 @@ Property Descriptions
 Methods Descriptions
 --------------------
 
-* `Toast new(text: String, lenght: ToastLenght)`\
-    Returns a new Toast. The `text` is the text that will be shown inside of the toast. `lenght ` represents the duration lenght. `mstyle` represents the toast syle stored in style(see propriety descriptions).
+* `Toast new(text: String, length: ToastLenght)`\
+    Returns a new Toast. The `text` is the text that will be shown inside of the toast. `length ` represents the duration length. `mstyle` represents the toast syle stored in style(see propriety descriptions).
 * `void show()`\
     Starts the toast.
 
