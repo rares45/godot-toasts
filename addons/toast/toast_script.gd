@@ -12,6 +12,7 @@ enum {
 
 var labelText;
 var toastDuration;
+var toastTimeout;
 var style;
 
 #Nodes
@@ -89,8 +90,10 @@ func _ready():
 	match toastDuration:
 		LENGTH_SHORT:
 			timer.wait_time = 0.5;
+			toastTimeout = 0.5;
 		LENGTH_LONG:
 			timer.wait_time = 2;
+			toastTimeout = 2;
 	add_child(timer)
 
 	#Setting the animation
@@ -109,7 +112,7 @@ func show():
 
 func _animationEnded(whichAnimation): #_a ignores the argument passed from the animation player
 	if whichAnimation == "toast_animations/start":
-		await get_tree().create_timer(toastDuration).timeout
+		await get_tree().create_timer(toastTimeout).timeout
 		animation.play("toast_animations/end")
 	elif whichAnimation == "endAnimation":
 		animation.play("toast_animations/end")
