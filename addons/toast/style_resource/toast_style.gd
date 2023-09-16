@@ -1,4 +1,4 @@
-tool
+@tool
 extends Resource
 
 class_name ToastStyle
@@ -13,16 +13,16 @@ enum Type{
 	Full
 };
 
-export(Position) var position = Position.Bottom;
-export(Type) var toastType = Type.Float;
+@export var position: Position = Position.Bottom;
+@export var toastType: Type = Type.Float;
 
-export(Color, RGBA) var backgroundColor = Color( 1, 1, 1, 0.8);
-export(Color, RGBA) var fontColor = Color( 0.01, 0.01, 0.01, 1);
+@export var backgroundColor: Color = Color( 1, 1, 1, 0.8);
+@export var fontColor: Color = Color( 0.01, 0.01, 0.01, 1);
 
-export(int) var cornerRadius = 20;
-export(float) var contentMarginLeft = 20.0;
-export(float) var contentMarginRight = 20.0;
-export(float) var contentMarginTop = 10.0;
-export(float) var contentMarginBottom = 10.0;
+@export var cornerRadius: int = 20;
+@export var contentMarginLeft: float = 20.0;
+@export var contentMarginRight: float = 20.0;
+@export var contentMarginTop: float = 10.0;
+@export var contentMarginBottom: float = 10.0;
 
-export(int, "Left", "Center", "Right", "Fill") var textAlign = 1;
+@export_enum("Left", "Center", "Right", "Fill") var textAlign: int = 1;

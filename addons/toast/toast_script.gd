@@ -1,4 +1,4 @@
-tool
+@tool
 extends Control
 
 class_name Toast
@@ -30,7 +30,7 @@ func _init(text: String = "", duration:= LENGTH_LONG, mstyle: ToastStyle = prelo
 func _ready():
 	#Setting itself
 	visible = false;
-	set_anchors_and_margins_preset(Control.PRESET_WIDE);
+	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT);
 	mouse_filter = MOUSE_FILTER_IGNORE
 
 	#Setting the label
@@ -46,7 +46,7 @@ func _ready():
 	styleBoxParser.corner_radius_bottom_right = style.cornerRadius;
 	styleBoxParser.corner_radius_top_left = style.cornerRadius;
 	styleBoxParser.corner_radius_top_right = style.cornerRadius;
-	label.add_stylebox_override("normal", styleBoxParser);
+	label.add_theme_stylebox_override("normal", styleBoxParser);
 
 	label.set("custom_colors/font_color", style.fontColor);
 	label.text = labelText;
@@ -57,13 +57,13 @@ func _ready():
 				label.anchor_top = 1.0;
 				label.anchor_left = 0.5;
 				label.anchor_right = 0.5;
-				label.margin_bottom = -60;
+				label.offset_bottom = -60;
 			elif style.toastType == ToastStyle.Type.Full:
 				label.anchor_bottom = 1.0;
 				label.anchor_top = 1.0;
 				label.anchor_left = 0;
 				label.anchor_right = 1;
-				label.margin_bottom = 0;
+				label.offset_bottom = 0;
 			label.grow_vertical = 0;
 		ToastStyle.Position.Top:
 			if style.toastType == ToastStyle.Type.Float:
@@ -80,7 +80,7 @@ func _ready():
 				label.margin_top = 0;
 			label.grow_vertical = 1;
 	label.grow_horizontal = 2;
-	label.align = 1;
+	label.horizontal_alignment = 1;
 	add_child(label);
 
 	#Setting the timer
@@ -95,24 +95,24 @@ func _ready():
 
 	#Setting the animation
 	animation = AnimationPlayer.new();
-	animation.add_animation("start", load("res://addons/toast/animations/start.anim"));
-	animation.add_animation("end", load("res://addons/toast/animations/end.anim"));
+	var toast_animations = AnimationLibrary.new()
+	toast_animations.add_animation("start", load("res://addons/toast/animations/start.anim"))
+	toast_animations.add_animation("end", load("res://addons/toast/animations/end.anim"))
+	animation.add_animation_library("toast_animations", toast_animations)
 	add_child(animation);
 
 
 func show():
-	animation.play("start");
-# warning-ignore:return_value_discarded
-	animation.connect("animation_finished", self, "_animationEnded", ["startAnimation"]);
+	animation.play("toast_animations/start")
+	animation.animation_finished.connect(_animationEnded)
 	visible = true;
 
-func _animationEnded(_a, whichAnimation): #_a ignores the argument passed from the animation player
-	if whichAnimation == "startAnimation":
-		timer.start();
-# warning-ignore:return_value_discarded
-		timer.connect("timeout", self, "_animationEnded", [null, "endAnimation"]);
+func _animationEnded(whichAnimation): #_a ignores the argument passed from the animation player
+	if whichAnimation == "toast_animations/start":
+		await get_tree().create_timer(toastDuration).timeout
+		animation.play("toast_animations/end")
 	elif whichAnimation == "endAnimation":
-		animation.play("end");
+		animation.play("toast_animations/end")
 # warning-ignore:return_value_discarded
 		animation.disconnect("animation_finished", self, "_animationEnded");
 		animation.connect("animation_finished", self, "_done");
