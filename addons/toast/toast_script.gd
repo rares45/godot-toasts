@@ -49,7 +49,7 @@ func _ready():
 	styleBoxParser.corner_radius_top_right = style.cornerRadius;
 	label.add_theme_stylebox_override("normal", styleBoxParser);
 
-	label.set("custom_colors/font_color", style.fontColor);
+	label.add_theme_color_override("font_color", style.fontColor);
 	label.text = labelText;
 	match style.position:
 		ToastStyle.Position.Bottom:
